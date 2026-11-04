@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anime Sakura Animation</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    background: #182b48;
+    font-family: sans-serif;
+}
+
+.scene {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+        to bottom,
+        #263e65,
+        #a7b6d8,
+        #f4c6d2
+    );
+}
+
+/* Moon */
+.moon {
+    position: absolute;
+    top: 12%;
+    right: 15%;
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    background: #fff4dc;
+    box-shadow: 0 0 45px #fff4dc;
+}
+
+/* Ground */
+.ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 25%;
+    background: linear-gradient(#526b68, #263c3b);
+}
+
+/* Anime girl */
+.girl {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 260px;
+    animation: idle 3s ease-in-out infinite;
+}
+
+/* Hair */
+.hair {
+    position: absolute;
+    top: 0;
+    left: 15px;
+    width: 90px;
+    height: 110px;
+    border-radius: 48% 48% 35% 35%;
+    background: #29243b;
+    animation: hairMove 3s ease-in-out infinite;
+}
+
+.hair::after {
+    content: "";
+    position: absolute;
+    top: 45px;
+    left: -12px;
+    width: 115px;
+    height: 100px;
+    background: #29243b;
+    border-radius: 20% 20% 45% 45%;
+    z-index: -1;
+}
+
+/* Face */
+.face {
+    position: absolute;
+    top: 25px;
+    left: 30px;
+    width: 60px;
+    height: 75px;
+    background: #ffdbbd;
+    border-radius: 45% 45% 50% 50%;
+    z-index: 2;
+}
+
+/* Eyes */
+.eye {
+    position: absolute;
+    top: 33px;
+    width: 8px;
+    height: 12px;
+    background: #382c38;
+    border-radius: 50%;
+    animation: blink 4s infinite;
+}
+
+.eye.left { left: 12px; }
+.eye.right { right: 12px; }
+
+@keyframes blink {
+    0%, 45%, 49%, 100% { transform: scaleY(1); }
+    47% { transform: scaleY(0.1); }
+}
+
+/* Body */
+.body {
+    position: absolute;
+    top: 95px;
+    left: 15px;
+    width: 90px;
+    height: 130px;
+    background: #e9eaf4;
+    clip-path: polygon(25% 0, 75% 0, 100% 100%, 0 100%);
+    z-index: 1;
+}
+
+.skirt {
+    position: absolute;
+    top: 190px;
+    left: 5px;
+    width: 110px;
+    height: 55px;
+    background: #343c59;
+    clip-path: polygon(25% 0, 75% 0, 100% 100%, 0 100%);
+}
+
+/* Animation */
+@keyframes idle {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-5px); }
+}
+
+@keyframes hairMove {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(3deg); }
+}
+
+/* Falling petals */
+.petal {
+    position: absolute;
+    top: -30px;
+    width: 13px;
+    height: 18px;
+    border-radius: 80% 10% 80% 10%;
+    background: #ffd1df;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    100% {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+.caption {
+    position: absolute;
+    bottom: 7%;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 17px;
+    letter-spacing: 4px;
+    text-shadow: 0 2px 8px #26304d;
+}
+</style>
+</head>
+
+<body>
+
+<div class="scene">
+
+    <div class="moon"></div>
+
+    <div class="girl">
+        <div class="hair"></div>
+        <div class="face">
+            <div class="eye left"></div>
+            <div class="eye right"></div>
+        </div>
+        <div class="body"></div>
+        <div class="skirt"></div>
+    </div>
+
+    <div class="ground"></div>
+
+    <div class="caption">
+        UNDER THE SAKURA
+    </div>
+
+</div>
+
+<script>
+for (let i = 0; i < 30; i++) {
+    let petal = document.createElement("div");
+
+    petal.className = "petal";
+
+    petal.style.left = Math.random() * 100 + "%";
+    petal.style.animationDuration =
+        (4 + Math.random() * 6) + "s";
+
+    petal.style.animationDelay =
+        Math.random() * 8 + "s";
+
+    document.querySelector(".scene").appendChild(petal);
+}
+</script>
+
+</body>
+</html>
+  
